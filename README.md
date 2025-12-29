@@ -109,6 +109,16 @@ The optimizer implementations used to generate the plot are not included here, a
 Independent reproduction with external implementations is encouraged.
 
 ---
+Key Observations from the Stability Test
+
+The stability plot shows a clear separation between optimizers under extreme learning-rate variation.
+SGD exhibits a narrow stability window and diverges rapidly as the learning rate increases, which is expected on highly anisotropic quadratic objectives.
+
+Adam remains stable only within a limited mid-range of learning rates and diverges outside of it; in the tested regime, its stability window is significantly narrower and overlaps with SGD in most regions. As a result, Adam’s curve largely collapses onto the unstable baseline and is visually indistinguishable from zero over most of the sweep, despite being included in the evaluation.
+
+In contrast, the stability-modulated optimizer maintains stable behavior across a substantially wider learning-rate range, including regimes where both SGD and Adam diverge.
+
+This indicates that the observed effect is not a consequence of tuning or speed, but of structural stability of the update dynamics: the optimizer remains well-behaved even when the learning rate is pushed far beyond the typical safe range for standard first-order methods.
 
 ## Scope
 
